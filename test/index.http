@@ -1,0 +1,52 @@
+###
+GET http://localhost:3000/api
+
+###
+GET http://localhost:3000/api/comerces
+
+###
+GET http://localhost:3000/api/
+
+###
+POST http://localhost:3000/api/comerces HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Mi Inc2reible Negocio",
+  "CIF": "M781654356",
+  "direccion": "Calle Ferraz 22",
+  "email": "micomer2cio2@gmail.com",
+  "telefono": "3412776789"
+}
+
+###
+PUT http://localhost:3000/api/comerces/65fe12eb87df60a3ecf8ef86 HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Mi Comercio espectacular",
+  "CIF": "M78123426",
+  "direccion": "Calle Falsa 123",
+  "email": "micomercio1113@comercio.com",
+  "telefono": "76323456789"
+}
+
+
+### (logico)
+DELETE http://localhost:3000/api/comerces/M78123426
+
+### (fisico)
+DELETE http://localhost:3000/api/v1/comercios/MICIF12345
+Content-Type: application/json
+
+###
+POST http://localhost:3000/api/comerces HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Mi A Negocio",
+  "CIF": "M78123426",
+  "direccion": "Calle Ferraz 22",
+  "email": "abichuela@gmail.com",
+  "telefono": "34123476789"
+}

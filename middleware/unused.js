@@ -1,0 +1,2 @@
+//Realmente aqui hay un problema con como está escrito el ejercicio, dices middelware validador pero para eso tenemos los validators,
+//La carpeta middleware la usaremos en la segunda practica para el manejo de sesiones y autenticación
