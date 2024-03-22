@@ -12,11 +12,11 @@ POST http://localhost:3000/api/comerces HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Mi Inc2reible Negocio",
-  "CIF": "M781654356",
-  "direccion": "Calle Ferraz 22",
-  "email": "micomer2cio2@gmail.com",
-  "telefono": "3412776789"
+  "nombre": "Mongo esta locooooo",
+  "CIF": "M7813337806",
+  "direccion": "Calle Fe1az 22",
+  "email": "micom444e2r2cio2@gmail.com",
+  "telefono": "3411788789"
 }
 
 ###
@@ -33,10 +33,10 @@ Content-Type: application/json
 
 
 ### (logico)
-DELETE http://localhost:3000/api/comerces/M78123426
+DELETE http://localhost:3000/api/comerces/M7816577806
 
 ### (fisico)
-DELETE http://localhost:3000/api/v1/comercios/MICIF12345
+DELETE http://localhost:3000/api/comerces/M7816577806
 Content-Type: application/json
 
 ###

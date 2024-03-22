@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//Conectamos con la BBDD
 const dbConnect = async () => {
     const db_uri = process.env.DB_URI;
     mongoose.set('strictQuery', false);

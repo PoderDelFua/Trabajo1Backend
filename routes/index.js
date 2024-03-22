@@ -1,6 +1,7 @@
 const express = require("express")
 const fs = require("fs")
 const router = express.Router()
+//Función para quitar la extensión de los archivos
 const removeExtension = (fileName) => {
     //Solo la primera parte del split (lo de antes del punto)
     return fileName.split('.').shift()
