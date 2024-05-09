@@ -22,6 +22,10 @@ const comerceSchema = new mongoose.Schema({
             type: String,
             unique: true
         },
+        idComercePage: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'webcomerces'
+        },
     },
     {
         timestamps: true,

@@ -5,7 +5,10 @@ GET http://localhost:3000/api
 GET http://localhost:3000/api/comerces
 
 ###
-GET http://localhost:3000/api/
+GET http://localhost:3000/api/webcomerces
+
+###
+GET http://localhost:3000/api/comerces/65fe18ee99d233baea9f5324
 
 ###
 POST http://localhost:3000/api/comerces HTTP/1.1
@@ -44,9 +47,152 @@ POST http://localhost:3000/api/comerces HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Mi A Negocio",
-  "CIF": "M78123426",
-  "direccion": "Calle Ferraz 22",
-  "email": "abichuela@gmail.com",
-  "telefono": "34123476789"
+  "nombre": "Mi seguro Negocio",
+  "CIF": "M78153426",
+  "direccion": "Calle F2rraz 22",
+  "email": "abichu1la@gmail.com",
+  "telefono": "34123479789",
+  "role": ["admin"]
 }
+
+### Creamos usuario
+POST http://localhost:3000/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Pepe Almeria",
+  "email": "tiopepeSegundo1@gmail.com",
+  "password": "12345678",
+  "edad": 22,
+  "ciudad": "Madrid",
+  "intereses": ["moda", "tecnologia"],
+  "permiteRecibirOfertas": true
+}
+
+### Login usuario
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "tiopepeSegundo2@gmail.com",
+  "password": "1234567"
+}
+
+### Página de comercio creada
+POST http://localhost:3000/api/webcomerces HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNDg4NjQsImV4cCI6MTcxNTI1NjA2NH0.wkVABi_MsTQhfuk_jXefkEg9urLf6lDyz0LkdCanE_k
+
+{
+  "ciudad": "Madrid",
+  "actividad": "Turismo",
+  "titulo": "Tours por Madrid",
+  "resumen": "Descubre Madrid con nuestros tours",
+  "telefono": "34123479789"
+}
+
+### Comercio usando token proporcionado por el admin accede a su comercio y lo modifica usando el cif anterior
+PUT http://localhost:3000/api/comerces/65fe1a9b48d0aedbed3ff06b HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNDgxMzksImV4cCI6MTcxNTI1NTMzOX0.21X4EBy8VjySlc8vpvpXupduRC4ahY8zFaiuONFxYOo
+
+{
+    "nombre": "Mi de patos",
+    "CIF": "M78153426",
+    "direccion": "Calle Falsa 123",
+    "email": "micomercio1113@comercio.com",
+    "telefono": "76323456789"
+}
+
+### Comercio usando token proporcionado por el admin accede a su comercio y lo elimina usando el cif anterior
+DELETE http://localhost:3000/api/comerces/M78153426 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUwMjg0ODksImV4cCI6MTcxNTAzNTY4OX0.tnV4ZyOX1-aolF5DghZILAz-Hz0UnXWgjnCWVvo-t4M
+
+{
+  "CIF": "M78153426"
+}
+
+### Si el usuario ha iniciado sesión puede actualizar su perfil
+PATCH http://localhost:3000/api/users/updateUser/6637b4f13e98deb1d1860c21 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5NmRmZTM4ZDg0YzQ5Zjg3YjI1ZmIiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvNUBnbWFpbC5jb20iLCJpYXQiOjE3MTUwMzk4NDAsImV4cCI6MTcxNTA0NzA0MH0.7vRExzyUdCdfBIi463tJ_VNACJESBLqv1KR641EJD2A
+
+{
+  "id": "66396dfe38d84c49f87b25fb",
+  "ciudad": "Córdoba"
+}
+
+### Si usuario logeado, puede eliminar su perfil
+DELETE http://localhost:3000/api/users/deleteUser/66396dfe38d84c49f87b25fb HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5NmRmZTM4ZDg0YzQ5Zjg3YjI1ZmIiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvNUBnbWFpbC5jb20iLCJpYXQiOjE3MTUwMzk4NDAsImV4cCI6MTcxNTA0NzA0MH0.7vRExzyUdCdfBIi463tJ_VNACJESBLqv1KR641EJD2A
+
+{
+  "id": "66396dfe38d84c49f87b25fb"
+}
+
+### Con un token sube una foto el comercio
+POST http://localhost:3000/api/storage HTTP/1.1
+Content-Type: multipart/form-data; boundary=Boundry
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyMTA0NjgsImV4cCI6MTcxNTIxNzY2OH0.0GYBEJoZvG8nVh8IsfpCeLPmFJLdenpJ3TWublSY74A
+
+--Boundry
+Content-Disposition: form-data; name="image"; filename="img.png"
+Content-Type: image/png
+
+< ./img.png
+
+--Boundry--
+
+### Asociamosel id de la imagen al comercio
+PUT http://localhost:3000/api/webcomerces/663c9f6efa614fc3dbf717cb HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNTAxMTksImV4cCI6MTcxNTI1NzMxOX0.AiKa9KdyMkN1pZC-bNUv5uPvJkdSDPWC9eKrEp6mYZw
+
+{
+  "id": "663c9f6efa614fc3dbf717cb",
+  "image": "663c0aa07dfd198df0d9f6e7"
+}
+
+### Usuario anónimo puede obtener comercios por ciudad
+GET http://localhost:3000/api/webcomerces/buscar/Madrid
+
+### Usuario anónimo puede obtener comercios por ciudad y actividad
+GET http://localhost:3000/api/webcomerces/buscar/Madrid/Turismo
+
+### Creamos una reseña a un comercio
+POST http://localhost:3000/api/users/createResena HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNTMzNzQsImV4cCI6MTcxNTI2MDU3NH0.glSa4ST_kkpj2VmovPwrR2x47H55F1IGYqhk35JZD9k
+
+{
+  "id": "6637b4f13e98deb1d1860c21",
+  "resena": "Me encanta este comercio muy recomendable"
+}
+
+### Asociamos la reseña al comercio
+PUT http://localhost:3000/api/webcomerces/663c9f6efa614fc3dbf717cb HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNTMzNzQsImV4cCI6MTcxNTI2MDU3NH0.glSa4ST_kkpj2VmovPwrR2x47H55F1IGYqhk35JZD9k
+
+{
+    "id": "663c9f6efa614fc3dbf717cb",
+    "resenaUsuario": "6637b4f13e98deb1d1860c21"
+}
+
+### Usuario pone score a un webcomerce
+PUT http://localhost:3000/api/webcomerces/score HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM3YjRmMTNlOThkZWIxZDE4NjBjMjEiLCJlbWFpbCI6InRpb3BlcGVTZWd1bmRvMkBnbWFpbC5jb20iLCJpYXQiOjE3MTUyNTMzNzQsImV4cCI6MTcxNTI2MDU3NH0.glSa4ST_kkpj2VmovPwrR2x47H55F1IGYqhk35JZD9k
+
+{
+    "id": "663c9f6efa614fc3dbf717cb",
+    "scoring": 5
+}
+
+### Comercio consulta los usuarios de su ciudad que tengan permitido recibir ofertas
+GET http://localhost:3000/api/users/ofertas/Madrid
+
+### Llamada erronea
+GET http://localhost:3000/api/webcomerces/buscar/Madrid/Turismo/Algo

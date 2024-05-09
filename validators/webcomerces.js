@@ -6,11 +6,11 @@ const validateResults = require("../utils/handleValidator")
 
 
 const validatorCreateComerce = [
-    check("nombre").exists().notEmpty(),
-    check("direccion").exists().notEmpty(),
+    check("ciudad").exists().notEmpty(),
+    check("actividad").exists().notEmpty(),
+    check("titulo").exists().notEmpty(),
     check("telefono").exists().notEmpty(),
-    check("email").exists().notEmpty(),
-    check("CIF").exists().notEmpty(),
+    check("resumen").exists().notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -30,8 +30,24 @@ const validatorUpdateComerce = [
     check("telefono").optional(),
     check("image").optional().isMongoId(),
     check("email").optional(),
-    check("CIF").exists().notEmpty(),
+    check("resenaUsuario").optional(),
+    check("CIF").optional(),
     (req, res, next) => validateResults(req, res, next)
 ]
 
-module.exports = { validatorCreateComerce, validatorGetComerce , validatorUpdateComerce}
+const validatorBuscarCiudad = [
+    check("ciudad").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorScore = [
+    check("scoring").exists().notEmpty().isNumeric(),
+    check("id").exists().notEmpty().isMongoId(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorCreateComerce, validatorGetComerce , validatorUpdateComerce, validatorBuscarCiudad, validatorScore}
